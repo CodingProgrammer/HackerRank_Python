@@ -7,19 +7,17 @@ CDC
 Sample Output
 2
 '''
-so = 'abcdcdcdc'
-sb = 'cdc'
-l_so = len(so)
+string = 'abcdcdc'
+sub_string = 'cdc'
+l_string = len(string)
 l = []
 index = 0
 n = 0
-for i in range(0, l_so):
-    index = so.find(sb,index + 1) #index must be added 1 here, 
-    l.append(index)               #or it will be loop at the previous index
-print(l)
-set_index = set(l)                #use 'set' to eliminate the duplicated elements
-print(set_index)                  #The elements in 'set' except -1 are the index of the sub in original
-for i in set_index:
+for i in range(0, l_string):
+    index = string.find(sub_string,index + 1) #index must be added 1 here, 
+    l.append(index)               #or it will be looped at the previous index
+set_index = set(l)                #use 'set' to eliminate the duplicated elements             
+for i in set_index:               #The elements in 'set' except -1 are the index of the sub in original
     if i > 0:
         n += 1
 print(n)
