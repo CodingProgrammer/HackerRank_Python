@@ -22,6 +22,22 @@ class Solution:
         else:
             height = 1 + max(self.getHeight(root.left), self.getHeight(root.right))
             return height
+    
+    def levelOrder(self, root):
+        if root == None:
+            return 
+        else:
+            myqueue = []
+            myqueue.append(root)
+            while myqueue:
+                node = myqueue.pop(0)
+                if node:
+                    print(node.data, end = ' ')
+                    if node.left:
+                        myqueue.append(node.left)
+                    if node.right:
+                        myqueue.append(node.right)
+
 
 T = 9
 l = [20, 50, 35, 44, 9, 15, 62, 11, 13]
@@ -32,3 +48,4 @@ for i in range(T):
     root = myTree.insert(root,data)
 height = myTree.getHeight(root)
 print(height)  
+myTree.levelOrder(root)
