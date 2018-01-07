@@ -2,6 +2,9 @@
 This is a LinkedList class and some of the methods useful
 These methods contain:
 InitList,  GetLength, is_Empty, Clear, Append, Display, Display, GetItem, Index, Insert, Delete
+
+2018/01/07: The real change on a LinkedList sequence happen to .next(that means the pointer), the 
+change on curent(like: current = current.netx) just to iterate the LinkedList.
 '''
 class Node:
     def __init__(self,data,next = None):
@@ -125,6 +128,16 @@ class LinkList:
                 current = current.next
             if self.Index(current.data) == index:
                 previous.next = current.next
+
+    def Delete_Dupliactes(self):
+        if self.head == None:
+            return None
+        current = self.head
+        while current.next:
+            if current.data == current.next.data:
+                current.next = current.next.next
+            else:
+                current = current.next
 
 l1 = LinkList()
 l1.InitList([1, 2, 3, 4, 5])
