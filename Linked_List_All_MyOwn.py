@@ -5,11 +5,15 @@ InitList,  GetLength, is_Empty, Clear, Append, Display, Display, GetItem, Index,
 
 2018/01/07: The real change on a LinkedList sequence happen to .next(that means the pointer), the 
 change on curent(like: current = current.netx) just to iterate the LinkedList.
+
+2018/01/10:
+1. next is a build-in function, so ues next_ 
+2. Next()--- a generator. Make it possible to iterate the Linkedlist outside the LList class
 '''
 class Node:
-    def __init__(self,data,next = None):
+    def __init__(self,data,next_ = None):
         self.data = data
-        self.next = next
+        self.next = next_
 
 class LinkList:
     def __init__(self):
@@ -46,7 +50,8 @@ class LinkList:
 
     def Append(self,item):     
         if self.head == None:
-            return Node(item)
+            self.head = Node(item)
+            return 
         else:
             current = self.head
             while current.next != None:
@@ -58,7 +63,7 @@ class LinkList:
         while current != None:
             print(current.data, end = ' ')
             current = current.next
-        print(sep = ' ')
+        print(sep = ' ')            # to print a \n
     def GetItem(self, index):
         if self.GetLength() == 0:
             print('The LinkList is empty!', end = ' ')
@@ -100,7 +105,7 @@ class LinkList:
             if self.Index(current.data) == index:
                 new_node.next = current
                 previous.next = new_node
-                current = new_node
+                #current = new_node
             '''     
             while current.next:      #replace 90 ~ 100 by 82 ~ 88
                 if self.Index(current.data) == index:
@@ -116,8 +121,10 @@ class LinkList:
             '''         
 
     def Delete(self,index):
-        if self.GetLength() == 0 or index < 0 or index > self.GetLength():
-            return -1
+        if self.head == None:
+            raise ValueError('The LinkedList is empty, can NOT Delete!')
+        if index < 0 or index > self.GetLength():
+            raise ValueError('Out of range!')
         if index == 0:
             self.head = self.head.next
         else:
@@ -128,6 +135,19 @@ class LinkList:
                 current = current.next
             if self.Index(current.data) == index:
                 previous.next = current.next
+    def Pop(self):
+        if self.head == None:
+            raise ValueError('Empty LinkedList!')
+        current = self.head
+        previous = current
+        if current.next == None:
+            e = current.data
+            self.head = None
+            return e
+        while current.next:
+            previous = current
+            current = current.next
+        previous.next = current.next
 
     def Delete_Dupliactes(self):
         if self.head == None:
@@ -139,9 +159,25 @@ class LinkList:
             else:
                 current = current.next
 
+    def Next(self):
+        if self.head == None:
+            raise StopIteration
+        current = self.head
+        while current:
+            yield current.data
+            current = current.next
+    
 l1 = LinkList()
+f = l1.Next()
+print(next(f))
 l1.InitList([1, 2, 3, 4, 5])
 l1.Display()
-l1.Insert(4,6)
+l1.Pop()
 l1.Display()
-print(l1)
+f = l1.Next()
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
+print(next(f))
