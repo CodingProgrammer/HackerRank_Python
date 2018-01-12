@@ -17,18 +17,18 @@ class Node:
 
 class LinkList:
     def __init__(self):
-        self.head = None
+        self._head = None
     
     def __str__(self):
-        current = self.head
+        current = self._head
         while current:
             print(current.data, end = ' ')
             current = current.next
         return ""
  
     def InitList(self,data):
-        self.head = Node(data[0])
-        current = self.head
+        self._head = Node(data[0])
+        current = self._head
         for i in data[1:]:
             new_node = Node(i)
             current.next = new_node
@@ -36,7 +36,7 @@ class LinkList:
 
     def GetLength(self):
         count = 0
-        current = self.head
+        current = self._head
         while current != None:
             current = current.next
             count += 1
@@ -46,19 +46,19 @@ class LinkList:
         return self.GetLength() == 0
 
     def Clear(self):
-         self.head = None
+         self._head = None
 
     def Append(self,item):     
-        if self.head == None:
-            self.head = Node(item)
+        if self._head == None:
+            self._head = Node(item)
             return 
         else:
-            current = self.head
+            current = self._head
             while current.next != None:
                 current = current.next
             current.next = Node(item)
     def Display(self):
-        current = self.head
+        current = self._head
         print('The data in LinkList are:', end = ' ')
         while current != None:
             print(current.data, end = ' ')
@@ -68,7 +68,7 @@ class LinkList:
         if self.GetLength() == 0:
             print('The LinkList is empty!', end = ' ')
         j = 0
-        current = self.head
+        current = self._head
         while current.next != None and j < index:
             current = current.next
             j += 1
@@ -80,7 +80,7 @@ class LinkList:
         if self.GetLength() == 0:
             print('The LinkList is empty!')
         j = 0
-        current = self.head
+        current = self._head
         while current.next and current.data != value:
             current = current.next
             j += 1
@@ -93,11 +93,11 @@ class LinkList:
             return -1
         new_node = Node(value)
         if index == 0:
-            new_node.next = self.head
-            self.head = new_node
+            new_node.next = self._head
+            self._head = new_node
         
         else:
-            current = self.head
+            current = self._head
             previous = current
             while current.next != None and self.Index(current.data) != index:
                 previous = current
@@ -121,14 +121,14 @@ class LinkList:
             '''         
 
     def Delete(self,index):
-        if self.head == None:
+        if self._head == None:
             raise ValueError('The LinkedList is empty, can NOT Delete!')
         if index < 0 or index > self.GetLength():
             raise ValueError('Out of range!')
         if index == 0:
-            self.head = self.head.next
+            self._head = self._head.next
         else:
-            current = self.head
+            current = self._head
             previous = current
             while current.next != None and self.Index(current.data) != index:
                 previous = current
@@ -136,13 +136,13 @@ class LinkList:
             if self.Index(current.data) == index:
                 previous.next = current.next
     def Pop(self):
-        if self.head == None:
+        if self._head == None:
             raise ValueError('Empty LinkedList!')
-        current = self.head
+        current = self._head
         previous = current
         if current.next == None:
             e = current.data
-            self.head = None
+            self._head = None
             return e
         while current.next:
             previous = current
@@ -150,9 +150,9 @@ class LinkList:
         previous.next = current.next
 
     def Delete_Dupliactes(self):
-        if self.head == None:
+        if self._head == None:
             return None
-        current = self.head
+        current = self._head
         while current.next:
             if current.data == current.next.data:
                 current.next = current.next.next
@@ -160,13 +160,13 @@ class LinkList:
                 current = current.next
 
     def Next(self):
-        if self.head == None:
+        if self._head == None:
             raise StopIteration
-        current = self.head
+        current = self._head
         while current:
             yield current.data
             current = current.next
-    
+'''    
 l1 = LinkList()
 f = l1.Next()
 print(next(f))
@@ -181,3 +181,4 @@ print(next(f))
 print(next(f))
 print(next(f))
 print(next(f))
+'''
