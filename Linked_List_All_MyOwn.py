@@ -2,6 +2,7 @@
 This is a LinkedList class and some of the methods useful
 These methods contain:
 InitList,  GetLength, is_Empty, Clear, Append, Display, Display, GetItem, Index, Insert, Delete
+Pop,  Delete_Dupliactes, Next, Reverse
 
 2018/01/07: The real change on a LinkedList sequence happen to .next(that means the pointer), the 
 change on curent(like: current = current.netx) just to iterate the LinkedList.
@@ -9,6 +10,10 @@ change on curent(like: current = current.netx) just to iterate the LinkedList.
 2018/01/10:
 1. next is a build-in function, so ues next_ 
 2. Next()--- a generator. Make it possible to iterate the Linkedlist outside the LList class
+
+2018/01/19:
+1. Add Reverse function
+Algorithm: get a node from the front of a list and put it to the front of another list
 '''
 class Node:
     def __init__(self,data,next_ = None):
@@ -57,6 +62,7 @@ class LinkList:
             while current.next != None:
                 current = current.next
             current.next = Node(item)
+
     def Display(self):
         current = self._head
         print('The data in LinkList are:', end = ' ')
@@ -64,6 +70,7 @@ class LinkList:
             print(current.data, end = ' ')
             current = current.next
         print(sep = ' ')            # to print a \n
+
     def GetItem(self, index):
         if self.GetLength() == 0:
             print('The LinkList is empty!', end = ' ')
@@ -76,6 +83,7 @@ class LinkList:
             return current.data
         else:
             print('There is no such item in this LinkList!')
+
     def Index(self, value):
         if self.GetLength() == 0:
             print('The LinkList is empty!')
@@ -88,6 +96,7 @@ class LinkList:
             return j
         else:
             print('The value %d has not been found in this LinkList!' %(value))
+
     def Insert(self, index, value):
         if self.GetLength() == 0 or index < 0 or index > self.GetLength():
             return -1
@@ -135,6 +144,7 @@ class LinkList:
                 current = current.next
             if self.Index(current.data) == index:
                 previous.next = current.next
+
     def Pop(self):
         if self._head == None:
             raise ValueError('Empty LinkedList!')
@@ -148,6 +158,7 @@ class LinkList:
             previous = current
             current = current.next
         previous.next = current.next
+
 
     def Delete_Dupliactes(self):
         if self._head == None:
@@ -166,19 +177,20 @@ class LinkList:
         while current:
             yield current.data
             current = current.next
-'''    
+
+    def Reverse(self):
+        new_head = None
+        while self._head:
+            temp = self._head
+            self._head = temp.next
+            temp.next = new_head   #new element from original list points the head of new_list, so the new element of original list become new head of new list
+            new_head = temp        #update head of new list
+        self._head = new_head
+
+   
 l1 = LinkList()
-f = l1.Next()
-print(next(f))
-l1.InitList([1, 2, 3, 4, 5])
+l1.InitList([1, 2, 3, 3, 3, 4, 5])
 l1.Display()
-l1.Pop()
+l1.Delete_Dupliactes()
 l1.Display()
-f = l1.Next()
-print(next(f))
-print(next(f))
-print(next(f))
-print(next(f))
-print(next(f))
-print(next(f))
-'''
+
