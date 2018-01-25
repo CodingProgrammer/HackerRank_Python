@@ -1,3 +1,7 @@
+'''
+Algorithm: sub-string, so use slice operation to make sure the characters are consecutive. And use Counter to get the frequency of characters.
+Time complexity: O(n^3)
+'''
 #!/bin/python3
 
 import sys
