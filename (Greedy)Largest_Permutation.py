@@ -11,16 +11,16 @@ def largestPermutation(n, k, arr):
     table = {}
     for i in range(n):
         table[str(arr[i])] = i
+        
 
     for i in range(n):
         if num_swap >= k:
             break
 
         if arr[i] != (n - i):
-            temp =arr[i]
-            temp_pos = table[str(n-i)]
-            arr[i], arr[table[str(n-i)]] = arr[table[str(n-i)]], arr[i]
-            table[str(arr[i])], table[str(temp)] = i, temp_pos
+            a, b = arr[i], arr[table[str(n - i)]]
+            arr[i], arr[table[str(n - i)]] = arr[table[str(n - i)]], arr[i]
+            table[str(a)], table[str(b)] = table[str(b)], table[str(a)]
             num_swap += 1
     return arr
 
