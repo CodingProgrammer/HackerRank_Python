@@ -15,21 +15,24 @@ def fairRations(B):
 
     for i in range(N):
         if B[i] % 2 == 1:
+            #special operation on the first element
             if i == 0:
                 B[i] += 1
                 B[i + 1] +=1 
                 ans += 2
-
+            #special operation on the last element
             elif i == N - 1:
                 B[i] += 1
                 B[i - 1] += 1
                 ans += 2
-
+            #normal operation from 1 yo N - 1
             else:    
+                #prior to operate the current element and the front element especially when the front element is odd
                 if B[i - 1] % 2 == 1:
                     B[i] += 1
                     B[i - 1] += 1
                     ans += 2
+                #otherwise operate current element and the one after 
                 else:
                     B[i] += 1
                     B[i + 1] +=1 
