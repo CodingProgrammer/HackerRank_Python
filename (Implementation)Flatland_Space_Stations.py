@@ -7,11 +7,16 @@ import re
 import sys
 
 # Complete the flatlandSpaceStations function below.
-def flatlandSpaceStations(n, c):
-    ans = []
-    for each_city in range(n):
-        ans.append(min([abs(each_city - each_space) for each_space in c]))
+def flatlandSpaceStations(c, m, n):
+    ans = set()
+    for i in range(m - 1):
+        ans.add((c[i + 1] - c[i]) // 2)
+    ans.add(0)
+    ans.add(c[0] - 0)
+    ans.add(n - 1 - c[-1])
     return (max(ans))
+    
+    
     
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
@@ -24,7 +29,7 @@ if __name__ == '__main__':
 
     c = list(map(int, input().rstrip().split()))
 
-    result = flatlandSpaceStations(n, c)
+    result = flatlandSpaceStations(sorted(c), m, n)
 
     fptr.write(str(result) + '\n')
 
