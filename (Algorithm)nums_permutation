@@ -1,0 +1,4 @@
+def number_permutation(num_a, num_b):
+    if  a == 0 or b ==0:
+        return 1
+    return number_permutation(a-1, b) + number_permutation(a, b-1)
