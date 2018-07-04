@@ -1,0 +1,38 @@
+import random
+import copy
+def GenerateRandomList(number, size):
+	temp = []
+	random_legth = random.randint(0, size)
+	current_length = 0
+	while current_length < random_legth:
+		temp.append(random.randint(1, number))
+		current_length += 1
+	return temp
+
+def quickSort(arr, L, R):
+    if L < R:
+        P = partition(arr, L, R)
+        quickSort(arr, L, P[0] - 1)
+        quickSort(arr, P[1] + 1, R)
+    return ''.join(list(map(str, arr)))
+def partition(arr, L, R):
+    x = L - 1
+    y = R
+    cur = L
+    while cur < y:
+        if str(arr[cur]) + str(arr[R]) > str(arr[R]) + str(arr[cur]):
+            y -= 1
+            arr[cur], arr[y] = arr[y], arr[cur]
+        elif str(arr[cur]) + str(arr[R]) < str(arr[R]) + str(arr[cur]):
+            x += 1
+            arr[x], arr[cur] = arr[cur], arr[x]
+            cur += 1
+        else:
+            cur += 1
+    arr[y], arr[R] = arr[R], arr[y]
+    return (x + 1, y)
+    
+l = GenerateRandomList(400, 20)
+print(l)
+res = quickSort(l, 0, len(l) - 1)
+print(res)
