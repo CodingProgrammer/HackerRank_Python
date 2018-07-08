@@ -1,0 +1,48 @@
+import random
+def GenerateRandomList(number, size):
+	temp = []
+	random_legth = random.randint(0, size)
+	current_length = 0
+	while current_length < random_legth:
+		temp.append(random.randint(1, number))
+		current_length += 1
+	return temp
+
+def heapinsert(arr, index):
+    while index and  (arr[index] > arr[(index - 1) // 2]):
+        arr[index], arr[(index - 1) // 2] = arr[(index - 1) // 2], arr[index]
+        index = (index - 1) // 2
+#if arr[index] is smaller, rearrange the heap
+def heapify(arr, index, heapSize):
+    left = index * 2 + 1
+    while (left < heapSize):
+        if left + 1 < heapSize and arr[left + 1] > arr[left]:
+            largest = left + 1
+        else:
+            largest = left
+        if arr[largest] < arr[index]:
+            break
+        arr[largest], arr[index] = arr[index], arr[largest]
+        index = largest
+        left = 2 * index + 1
+
+def heapsort(arr):
+    length = len(arr)
+    if length < 2:
+        return arr
+    # 生成大根堆
+    for i in range(length):
+        heapinsert(arr, i)
+        
+    heapSize = length - 1
+    while heapSize > 0:
+        arr[0], arr[heapSize] = arr[heapSize], arr[0]
+        heapify(arr, 0, heapSize)
+        heapSize -= 1
+
+
+for i in range(20):
+    l = GenerateRandomList(30, 20)
+    standard = sorted(l)
+    heapsort(l)
+    print(l == standard)
